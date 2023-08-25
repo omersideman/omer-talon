@@ -23,3 +23,6 @@ suspend: key(ctrl-z)
 resume:
     insert("fg")
     key(enter)
+
+clear command: key(ctrl-u)
+

@@ -123,9 +123,9 @@ def letters(m) -> str:
 ctx = Context()
 modifier_keys = {
     # If you find 'alt' is often misrecognized, try using 'alter'.
-    "alt": "alt",  #'alter': 'alt',
-    "control": "ctrl",  #'troll':   'ctrl',
-    "shift": "shift",  #'sky':     'shift',
+    "alt": "alt",  # 'alter': 'alt',
+    "control": "ctrl",  # 'troll':   'ctrl',
+    "shift": "shift",  # 'sky':     'shift',
     "super": "super",
 }
 if app.platform == "mac":
@@ -134,21 +134,17 @@ if app.platform == "mac":
 ctx.lists["self.modifier_key"] = modifier_keys
 ctx.lists["self.letter"] = alphabet_list
 
-# `punctuation_words` is for words you want available BOTH in dictation and as key names in command mode.
-# `symbol_key_words` is for key names that should be available in command mode, but NOT during dictation.
+# # `punctuation_words` is for words you want available BOTH in dictation and as key names in command mode.
+# # `symbol_key_words` is for key names that should be available in command mode, but NOT during dictation.
 punctuation_words = {
     # TODO: I'm not sure why we need these, I think it has something to do with
     # Dragon. Possibly it has been fixed by later improvements to talon? -rntz
     "`": "`",
     ",": ",",  # <== these things
     "back tick": "`",
-    "comma": ",",
-    # Workaround for issue with conformer b-series; see #946
-    "coma": ",",
     "period": ".",
     "full stop": ".",
     "semicolon": ";",
-    "colon": ":",
     "forward slash": "/",
     "question mark": "?",
     "exclamation mark": "!",
@@ -169,57 +165,94 @@ punctuation_words = {
     "R paren": ")",
     "right paren": ")",
 }
+
+# symbol_key_words = {
+#     "dot": ".",
+#     "point": ".",
+#     "quote": "'",
+#     "question": "?",
+#     "apostrophe": "'",
+#     "L square": "[",
+#     "left square": "[",
+#     "square": "[",
+#     "R square": "]",
+#     "right square": "]",
+#     "slash": "/",
+#     "backslash": "\\",
+#     "minus": "-",
+#     "dash": "-",
+#     "equals": "=",
+#     "plus": "+",
+#     "grave": "`",
+#     "tilde": "~",
+#     "bang": "!",
+#     "down score": "_",
+#     "underscore": "_",
+#     "paren": "(",
+#     "brace": "{",
+#     "left brace": "{",
+#     "brack": "{",
+#     "bracket": "{",
+#     "left bracket": "{",
+#     "r brace": "}",
+#     "right brace": "}",
+#     "r brack": "}",
+#     "r bracket": "}",
+#     "right bracket": "}",
+#     "angle": "<",
+#     "left angle": "<",
+#     "less than": "<",
+#     "rangle": ">",
+#     "R angle": ">",
+#     "right angle": ">",
+#     "greater than": ">",
+#     "star": "*",
+#     "hash": "#",
+#     "percent": "%",
+#     "caret": "^",
+#     "amper": "&",
+#     "pipe": "|",
+#     "dub quote": '"',
+#     "double quote": '"',
+#     # Currencies
+#     "dollar": "$",
+#     "pound": "£",
+# }
+
 symbol_key_words = {
     "dot": ".",
-    "point": ".",
-    "quote": "'",
-    "question": "?",
-    "apostrophe": "'",
-    "L square": "[",
-    "left square": "[",
-    "square": "[",
-    "R square": "]",
-    "right square": "]",
+    "brick": "`",
     "slash": "/",
-    "backslash": "\\",
-    "minus": "-",
     "dash": "-",
-    "equals": "=",
+    "backslash": "\\",
+    "equal": "=",
     "plus": "+",
-    "grave": "`",
     "tilde": "~",
     "bang": "!",
-    "down score": "_",
-    "underscore": "_",
-    "paren": "(",
-    "brace": "{",
-    "left brace": "{",
-    "brack": "{",
-    "bracket": "{",
-    "left bracket": "{",
-    "r brace": "}",
-    "right brace": "}",
-    "r brack": "}",
-    "r bracket": "}",
-    "right bracket": "}",
-    "angle": "<",
-    "left angle": "<",
-    "less than": "<",
-    "rangle": ">",
-    "R angle": ">",
-    "right angle": ">",
-    "greater than": ">",
-    "star": "*",
-    "hash": "#",
-    "percent": "%",
-    "caret": "^",
+    "score": "_",
+    "quest": "?",
+    "single": "'",
+    "double": '"',
+    # "f string": 'f""",
+    "triple": '"""',
+    "leper": "(",
+    "repper": ")",
+    "lacker": "[",
+    "racker": "]",
+    "lacer": "{",
+    "racer": "}",
+    "langle": "<",
+    "wrangle": ">",
+    "snow": "*",
+    "pound": "#",
+    "percy": "%",
+    "tangle": "^",
     "amper": "&",
     "pipe": "|",
-    "dub quote": '"',
-    "double quote": '"',
-    # Currencies
     "dollar": "$",
-    "pound": "£",
+    "semi": ";",
+    "colon": ":",
+    "drip": ",",
 }
 
 # make punctuation words also included in {user.symbol_keys}
@@ -235,25 +268,27 @@ ctx.lists["self.arrow_key"] = {
 }
 
 simple_keys = [
-    "end",
-    "enter",
-    "escape",
-    "home",
-    "insert",
+    # "end",
+    # "enter",
+    # "escape",
+    # "home",
+    # "insert",
     "pagedown",
     "pageup",
     "space",
-    "tab",
+    # "tab",
 ]
 
 alternate_keys = {
-    "wipe": "backspace",
-    "delete": "backspace",
-    #'junk': 'backspace',
-    "forward delete": "delete",
+    "pop": "enter",
+    "drill": "delete",
+    "scratch": "backspace",
+    "scrape": "escape",
+    "spacer": "tab",
     "page up": "pageup",
     "page down": "pagedown",
 }
+
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):
     alternate_keys["menu key"] = "menu"

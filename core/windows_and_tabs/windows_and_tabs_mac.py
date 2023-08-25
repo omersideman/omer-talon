@@ -43,3 +43,6 @@ class AppActions:
 
     def window_previous():
         actions.key("cmd-shift-`")
+
+    # def window_show():
+    #     actions.key("alt-tab")

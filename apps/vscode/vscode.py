@@ -154,6 +154,10 @@ class Actions:
         """Show command palette"""
         actions.key("ctrl-shift-p")
 
+    def vscode_tab(number: int):
+        """Activate a tab by number"""
+        actions.user.vscode(f"workbench.action.openEditorAtIndex{number}")
+
 
 @mac_ctx.action_class("user")
 class MacUserActions:
@@ -217,7 +221,8 @@ class UserActions:
         actions.user.vscode("editor.action.insertCursorBelow")
 
     def multi_cursor_add_to_line_ends():
-        actions.user.vscode("editor.action.insertCursorAtEndOfEachLineSelected")
+        actions.user.vscode(
+            "editor.action.insertCursorAtEndOfEachLineSelected")
 
     def multi_cursor_disable():
         actions.key("escape")

@@ -191,6 +191,7 @@ prose_formatter_names = {
     "sentence": "CAPITALIZE_FIRST_WORD",
     "title": "CAPITALIZE_ALL_WORDS",
 }
+
 # Mapping from spoken phrases to formatters
 formatter_words = {
     phrase: formatters_dict[name]
@@ -360,3 +361,11 @@ def unformat_text(text: str) -> str:
 ctx.lists["self.formatters"] = formatter_words.keys()
 ctx.lists["self.code_formatter"] = code_formatter_names.keys()
 ctx.lists["self.prose_formatter"] = prose_formatter_names.keys()
+
+mod.list("phrase_ender", desc="list of commands that can be used to end a phrase")
+ctx.lists["self.phrase_ender"] = {
+    "void": "space",
+    "clap": "enter",
+    "spam": ", space",
+    "halt": "space:0",
+}

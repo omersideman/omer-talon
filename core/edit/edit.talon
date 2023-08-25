@@ -1,187 +1,198 @@
-# Zoom
-zoom in: edit.zoom_in()
-zoom out: edit.zoom_out()
-zoom reset: edit.zoom_reset()
+find it:                    edit.find()
 
-# Searching
-find it: edit.find()
-next one: edit.find_next()
+next one:                   edit.find_next()
 
-# Navigation
+last one:                   edit.find_previous()
 
-# The reason for these spoken forms is that "page up" and "page down" are globally defined as keys.
-scroll up: edit.page_up()
-scroll down: edit.page_down()
+tug:                        edit.left()
 
-go word left: edit.word_left()
-go word right: edit.word_right()
+tug <number_small> times:   user.left_n(number_small)
+t
+drain:                    edit.word_left()
 
-go left: edit.left()
-go right: edit.right()
-go up: edit.up()
-go down: edit.down()
+drain <number_small> times: user.words_left(number_small)
 
-go line start: edit.line_start()
-go line end: edit.line_end()
+push:                       edit.right()
 
-go way left:
-    edit.line_start()
-    edit.line_start()
-go way right: edit.line_end()
-go way up: edit.file_start()
-go way down: edit.file_end()
+push <number_small> times:  user.right_n(number_small)
 
-go top: edit.file_start()
-go bottom: edit.file_end()
+step:                       edit.word_right()
 
-go page up: edit.page_up()
-go page down: edit.page_down()
+step <number_small> times:  user.words_right(number_small)
 
-# Selecting
-select all: edit.select_all()
-select line: edit.select_line()
-select line start: user.select_line_start()
-select line end: user.select_line_end()
+north:                      user.up_n(1)
 
-select left: edit.extend_left()
-select right: edit.extend_right()
-select up: edit.extend_line_up()
-select down: edit.extend_line_down()
+north <number_small> times: user.up_n(number_small)
 
-select word: edit.select_word()
-select word left: edit.extend_word_left()
-select word right: edit.extend_word_right()
+south:                      user.down_n(1)
 
-select way left: edit.extend_line_start()
-select way right: edit.extend_line_end()
-select way up: edit.extend_file_start()
-select way down: edit.extend_file_end()
+south <number_small> times: user.down_n(number_small)
 
-# Indentation
-indent [more]: edit.indent_more()
-(indent less | out dent): edit.indent_less()
+head:                       edit.line_start()
 
-# Delete
-clear all: user.delete_all()
-clear line: edit.delete_line()
-clear line start: user.delete_line_start()
-clear line end: user.delete_line_end()
-clear left: edit.delete()
-clear right: user.delete_right()
+tail:                       edit.line_end()
 
-clear up:
+<user.teleport> way down:   edit.file_end()
+
+<user.teleport> way up:     edit.file_start()
+
+<user.teleport> bottom:     edit.file_end()
+
+<user.teleport> top:        edit.file_start()
+
+<user.teleport> page down:  edit.page_down()
+
+<user.teleport> page up:    edit.page_up()
+
+# selecting
+<user.select> line:         edit.select_line()
+
+<user.select> all:          edit.select_all()
+
+<user.select> left:         edit.extend_left()
+
+<user.select> right:        edit.extend_right()
+
+<user.select> up:           edit.extend_line_up()
+
+<user.select> down:         edit.extend_line_down()
+
+<user.select> word:         edit.select_word()
+
+<user.select> lefter:       edit.extend_word_left()
+
+<user.select> writer:       edit.extend_word_right()
+
+<user.select> head:         edit.extend_line_start()
+
+<user.select> tail:         edit.extend_line_end()
+
+<user.select> way up:       edit.extend_file_start()
+
+<user.select> way down:     edit.extend_file_end()
+
+# editing
+indent [more]:              edit.indent_more()
+
+(indent less | out dent):   edit.indent_less()
+
+# deleting
+
+scratch <number_small> times: user.delete_left_n(number_small)
+
+drill <number_small> times: user.delete_right_n(number_small)
+
+<user.delete> up:
     edit.extend_line_up()
     edit.delete()
 
-clear down:
+<user.delete> down:
     edit.extend_line_down()
     edit.delete()
 
-clear word: edit.delete_word()
+<user.delete> word:         edit.delete_word()
 
-clear word left:
-    edit.extend_word_left()
-    edit.delete()
+scratcher:                  user.delete_word_left_n(1)
 
-clear word right:
-    edit.extend_word_right()
-    edit.delete()
+scratcher <number_small> times: user.delete_word_left_n(number_small)
 
-clear way left:
+driller:                    user.delete_word_right_n(1)
+
+driller <number_small> times: user.delete_word_right_n(number_small)
+
+<user.delete> head:
     edit.extend_line_start()
     edit.delete()
 
-clear way right:
+<user.delete> tail:
     edit.extend_line_end()
     edit.delete()
 
-clear way up:
+<user.delete> way up:
     edit.extend_file_start()
     edit.delete()
 
-clear way down:
+<user.delete> way down:
     edit.extend_file_end()
     edit.delete()
 
-# Copy
-copy that: edit.copy()
-copy all: user.copy_all()
-copy line: user.copy_line()
-copy line start: user.copy_line_start()
-copy line end: user.copy_line_end()
-copy word: user.copy_word()
-copy word left: user.copy_word_left()
-copy word right: user.copy_word_right()
+<user.delete> all:
+    edit.select_all()
+    edit.delete()
 
-#to do: do we want these variants, seem to conflict
-# copy left:
-#      edit.extend_left()
-#      edit.copy()
-# copy right:
-#     edit.extend_right()
-#     edit.copy()
-# copy up:
-#     edit.extend_up()
-#     edit.copy()
-# copy down:
-#     edit.extend_down()
-#     edit.copy()
+#copy commands
+copy all:
+    edit.select_all()
+    edit.copy()
 
-# Cut
-cut that: edit.cut()
-cut all: user.cut_all()
-cut line: user.cut_line()
-cut line start: user.cut_line_start()
-cut line end: user.cut_line_end()
-cut word: user.cut_word()
-cut word left: user.cut_word_left()
-cut word right: user.cut_word_right()
+copy word:
+    edit.select_word()
+    edit.copy()
 
-#to do: do we want these variants
-# cut left:
-#      edit.select_all()
-#      edit.cut()
-# cut right:
-#      edit.select_all()
-#      edit.cut()
-# cut up:
-#      edit.select_all()
-#     edit.cut()
-# cut down:
-#     edit.select_all()
-#     edit.cut()
+copy lefter:
+    edit.extend_word_left()
+    edit.copy()
 
-# Paste
-(pace | paste) that: edit.paste()
-(pace | paste) enter:
+copy righter:
+    edit.extend_word_right()
+    edit.copy()
+
+copy line:
+    edit.select_line()
+    edit.copy()
+
+copy way up:
+    edit.extend_file_start()
+    edit.copy()
+
+copy way down:
+    edit.extend_file_end()
+    edit.copy()
+
+copy tail:
+    edit.extend_line_end()
+    edit.copy()
+
+copy head:
+    edit.extend_line_start()
+    edit.copy()
+
+paste:
     edit.paste()
-    key(enter)
-paste match: edit.paste_match_style()
-(pace | paste) all: user.paste_all()
-(pace | paste) line: user.paste_line()
-(pace | paste) line start: user.paste_line_start()
-(pace | paste) line end: user.paste_line_end()
-(pace | paste) word: user.paste_word()
 
-# Duplication
-clone that: edit.selection_clone()
-clone line: edit.line_clone()
+#cut commands
+cut all:
+    edit.select_all()
+    edit.cut()
 
-# Insert new line
-new line above: edit.line_insert_up()
-new line below | slap: edit.line_insert_down()
+cut word:
+    edit.select_word()
+    edit.cut()
 
-# Insert padding with optional symbols
-(pad | padding): user.insert_between(" ", " ")
-(pad | padding) <user.symbol_key>+:
-    insert(" ")
-    user.insert_many(symbol_key_list)
-    insert(" ")
+cut lefter:
+    edit.extend_word_left()
+    edit.cut()
 
-# Undo/redo
-undo that: edit.undo()
-redo that: edit.redo()
+cut righter:
+    edit.extend_word_right()
+    edit.cut()
 
-# Save
-file save: edit.save()
-file save all: edit.save_all()
+cut line:
+    edit.select_line()
+    edit.cut()
+
+cut way up:
+    edit.extend_file_start()
+    edit.cut()
+
+cut way down:
+    edit.extend_file_end()
+    edit.cut()
+
+cut tail:
+    edit.extend_line_end()
+    edit.cut()
+
+cut head:
+    edit.extend_line_start()
+    edit.cut()

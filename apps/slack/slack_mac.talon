@@ -30,7 +30,7 @@ add line: key(shift-enter)
 (slack | lack) (react | reaction): key(cmd-shift-\)
 (insert command | commandify): key(cmd-shift-c)
 insert link: key(cmd-shift-u)
-insert code: key(cmd-shift-alt-c)
+insert code: key(cmd-shift-c)
 (slack | lack) (bull | bullet | bulleted) [list]: key(cmd-shift-8)
 (slack | lack) (number | numbered) [list]: key(cmd-shift-7)
 (slack | lack) (quotes | quotation): key(cmd-shift->)
@@ -48,6 +48,7 @@ bold: key(cmd-b)
 emote <user.text>: "{text}"
 toggle left sidebar: key(cmd-shift-d)
 toggle right sidebar: key(cmd-.)
+full screen: key(ctrl-cmd-f)
 
 # DEPRECATED
 (move | next) focus:

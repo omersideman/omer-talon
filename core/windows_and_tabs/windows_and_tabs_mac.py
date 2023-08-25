@@ -46,3 +46,6 @@ class AppActions:
 
     # def window_show():
     #     actions.key("alt-tab")
+
+    def fullscreen_toggle():
+        actions.key("f11")

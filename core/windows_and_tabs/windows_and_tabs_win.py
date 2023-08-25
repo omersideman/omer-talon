@@ -46,3 +46,6 @@ class AppActions:
 
     def window_previous():
         actions.key("alt-shift-`")
+
+    def fullscreen_toggle():
+        actions.key("f11")

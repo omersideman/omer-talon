@@ -1,4 +1,9 @@
-from talon import Context, Module, actions, app
+import json
+import re
+from os.path import expanduser
+from pathlib import Path
+
+from talon import Context, Module, actions, app, clip
 
 is_mac = app.platform == "mac"
 
@@ -49,6 +54,32 @@ mac_ctx.matches = r"""
 os: mac
 app: vscode
 """
+
+mod.list("branchless_command", "A command to use with branchless that expects a commit")
+
+ctx.lists["user.branchless_command"] = {
+    "git push stack this": "Git push commit stack",
+    "git sink this": "Git sync commit",
+    "git ditch branch this": "Git delete branch",
+    "git ditch branch this force": "Git delete branch force",
+    "pop branch this": "Git switch to commit",
+}
+
+mod.list("launch_configuration", "A launch configuration for vscode")
+
+ctx.lists["user.launch_configuration"] = {
+    "stench": "Run extension",
+    "test": "Extension tests",
+    "test unit": "Unit tests only",
+    "test subset": "Run test subset",
+    "test talon": "Talon tests",
+    "test talon subset": "Talon tests subset",
+    # "Update fixtures": "Update fixtures",
+    # "Update fixtures subset": "Update fixtures subset",
+    # "Docusaurus start": "Docusaurus start",
+    # "Docusaurus build": "Docusaurus build",
+    # "cursorless.org client-side": "cursorless.org client-side",
+}
 
 
 @ctx.action_class("app")
@@ -112,17 +143,28 @@ class EditActions:
     def line_clone():
         actions.key("shift-alt-down")
 
-    def line_insert_down():
-        actions.user.vscode("editor.action.insertLineAfter")
-
-    def line_insert_up():
-        actions.user.vscode("editor.action.insertLineBefore")
-
     def jump_line(n: int):
         actions.user.vscode("workbench.action.gotoLine")
         actions.insert(str(n))
         actions.key("enter")
         actions.edit.line_start()
+
+    def line_insert_down():
+        actions.user.vscode_and_wait("editor.action.insertLineAfter")
+
+    def line_insert_up():
+        actions.user.vscode_and_wait("editor.action.insertLineBefore")
+
+    def save():
+        actions.key("cmd-s")
+        actions.sleep("50ms")
+
+
+@mac_ctx.action_class("edit")
+class EditActions:
+    def select_line(n: int = None):
+        # NB: this prevents opening a split when you're quick picking a file
+        actions.key("ctrl-e cmd-shift-left")
 
 
 @ctx.action_class("win")
@@ -150,13 +192,81 @@ class Actions:
         """Activate a terminal by number"""
         actions.user.vscode(f"workbench.action.terminal.focusAtIndex{number}")
 
+    def change_setting(setting_name: str, setting_value: any):
+        """
+        Changes a VSCode setting by name
+
+        Args:
+            setting_name (str): The name of the setting
+            setting_value (any): The new value.  Will be JSON encoded
+        """
+        original_settings_path = Path(
+            expanduser("~/Library/Application Support/Code/User/settings.json")
+        )
+        original_settings = original_settings_path.read_text()
+        regex = re.compile(rf'^(\s*)"{setting_name}": .*[^,](,?)$', re.MULTILINE)
+        new_settings = regex.sub(
+            rf'\1"{setting_name}": {json.dumps(setting_value)}\2', original_settings
+        )
+        original_settings_path.write_text(new_settings)
+
+    def set_zoom_level(level: int):
+        """Set zoom level"""
+        actions.user.change_setting("window.zoomLevel", level)
+
     def command_palette():
         """Show command palette"""
         actions.key("ctrl-shift-p")
 
-    def vscode_tab(number: int):
-        """Activate a tab by number"""
-        actions.user.vscode(f"workbench.action.openEditorAtIndex{number}")
+    def vscode_language_id() -> str:
+        """Returns the vscode language id of the current programming language"""
+
+    def copy_command_id():
+        """Copy the command id of the focused menu item"""
+        actions.key("tab:2 enter")
+        actions.sleep("750ms")
+        json_text = actions.edit.selected_text()
+        command_id = json.loads(json_text)["command"]
+        actions.app.tab_close()
+        clip.set_text(command_id)
+
+    def git_commit(text: str):
+        """Git commit"""
+        actions.user.vscode("git.commitStaged")
+        actions.sleep("500ms")
+        actions.user.insert_formatted(text, "CAPITALIZE_FIRST_WORD")
+
+    def cursorless_record_navigation_test():
+        """Run cursorless Record navigation test"""
+        actions.user.vscode_with_plugin(
+            "cursorless.recordTestCase", {"isHatTokenMapTest": True}
+        )
+
+    def cursorless_record_error_test():
+        """Record cursorless record error test"""
+        actions.user.vscode_with_plugin(
+            "cursorless.recordTestCase", {"recordErrors": True}
+        )
+
+    def cursorless_record_highlights_test():
+        """Record cursorless record error test"""
+        actions.user.vscode_with_plugin(
+            "cursorless.recordTestCase", {"isDecorationsTest": True}
+        )
+
+    def cursorless_record_that_mark_test():
+        """Record cursorless record error test"""
+        actions.user.vscode_with_plugin(
+            "cursorless.recordTestCase", {"captureFinalThatMark": True}
+        )
+
+    # From https://github.com/AndreasArvidsson/andreas-talon/blob/1f48ae59452004d2266aad908b301f93b262f875/apps/vscode/vscode.py#L382-L387
+    def vscode_add_missing_imports():
+        """Add all missing imports"""
+        actions.user.vscode_with_plugin(
+            "editor.action.sourceAction",
+            {"kind": "source.addMissingImports", "apply": "first"},
+        )
 
 
 @mac_ctx.action_class("user")
@@ -187,7 +297,7 @@ class UserActions:
         actions.user.vscode("workbench.action.focusLeftGroup")
 
     def split_next():
-        actions.user.vscode_and_wait("workbench.action.focusRightGroup")
+        actions.user.vscode_and_wait("workbench.action.navigateEditorGroups")
 
     def split_window_down():
         actions.user.vscode("workbench.action.moveEditorToBelowGroup")
@@ -221,8 +331,7 @@ class UserActions:
         actions.user.vscode("editor.action.insertCursorBelow")
 
     def multi_cursor_add_to_line_ends():
-        actions.user.vscode(
-            "editor.action.insertCursorAtEndOfEachLineSelected")
+        actions.user.vscode("editor.action.insertCursorAtEndOfEachLineSelected")
 
     def multi_cursor_disable():
         actions.key("escape")
@@ -249,9 +358,10 @@ class UserActions:
 
     def snippet_insert(text: str):
         """Inserts a snippet"""
-        actions.user.vscode("editor.action.insertSnippet")
-        actions.insert(text)
-        actions.key("enter")
+        actions.user.vscode_with_plugin_and_wait(
+            "editor.action.insertSnippet",
+            {"langId": actions.user.vscode_language_id(), "name": text},
+        )
 
     def snippet_create():
         """Triggers snippet creation"""
@@ -381,3 +491,69 @@ class UserActions:
         actions.edit.find(text)
         actions.sleep("100ms")
         actions.key("esc")
+
+    def select_next_token():
+        actions.edit.find("")
+        actions.key("enter")
+        actions.key("enter")
+        actions.key("esc")
+
+    def run_shell_command(shell_command: str):
+        """Run a shell command"""
+        # FIXME: Only do it this way if we are in a bash book
+        actions.edit.select_all()
+        actions.edit.cut()
+        actions.insert(shell_command)
+        actions.user.vscode("bashbook.cell.executeAndClear")
+
+    # find_and_replace.py support end
+
+
+python_ctx = Context()
+python_ctx.matches = r"""
+app: vscode
+mode: user.python
+mode: user.auto_lang
+and code.language: python
+"""
+
+
+@python_ctx.action_class("user")
+class PythonActions:
+    def vscode_language_id() -> str:
+        return "python"
+
+
+typescript_ctx = Context()
+typescript_ctx.matches = r"""
+app: vscode
+mode: user.typescript
+mode: user.auto_lang
+and code.language: typescript
+"""
+
+
+@typescript_ctx.action_class("user")
+class TypescriptActions:
+    def vscode_language_id() -> str:
+        return "typescript"
+
+
+mod.list("language_id", "language id")
+ctx.lists["user.language_id"] = {
+    "bash": "bash",
+    "html": "html",
+    "jason": "json",
+    "java": "java",
+    "lay tech": "tex",
+    "markdown": "markdown",
+    "python": "python",
+    "ruby": "ruby",
+    "rust": "rust",
+    "scala": "scala",
+    "text": "plaintext",
+    "typescript": "typescript",
+    "javascript": "javascript",
+    "go": "go",
+    "talon": "talon",
+}

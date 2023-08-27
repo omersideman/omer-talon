@@ -281,14 +281,21 @@ git rebase {user.git_branch}:
     "{git_branch}"
     key(enter)
     sleep(250ms)
-git commit [<user.prose>]$: user.git_commit(prose or "")
-git commit [<user.prose>] halt: user.git_commit(prose or "")
-git commit <user.prose> disclose:
-    user.git_commit(prose or "")
-    edit.save()
-    sleep(150ms)
-    app.tab_close()
-    sleep(250ms)
+# git commit [<user.prose>]$: user.git_commit(prose or "")
+# git commit [<user.prose>] halt: user.git_commit(prose or "")
+# git commit <user.prose> disclose:
+#     user.git_commit(prose or "")
+#     edit.save()
+#     sleep(150ms)
+#     app.tab_close()
+#     sleep(250ms)
+git commit [<user.text>]:
+    user.vscode("git.commitStaged")
+    sleep(100ms)
+    user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
+git commit undo: user.vscode("git.undoCommit")
+git commit amend: user.vscode("git.commitStagedAmend")
+Tried to add rephrase
 disk git commit [<user.prose>]$:
     key(esc:5)
     edit.save()

@@ -19,5 +19,14 @@ snap <user.running_applications> <user.window_snap_position>:
     user.snap_app(running_applications, window_snap_position)
 snap <user.running_applications> [screen] <number>:
     user.move_app_to_screen(running_applications, number)
-    
+
 full screen: app.fullscreen_toggle()
+
+focus {user.running_application}:
+    user.focus_name(running_application)
+
+(focus {user.running_application} <phrase>)+$:
+    user.focus_names(running_application_list, phrase_list)
+
+swap {user.running_application}:
+    user.swap_window_position(running_application)

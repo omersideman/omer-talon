@@ -422,7 +422,7 @@ select breadcrumb:          user.vscode("breadcrumbs.focusAndSelect")
 replace here:
     user.replace("")
     key(cmd-alt-l)
-paste:                      key(cmd-v)
+# paste:                      key(cmd-v)
 
 hover show:                 user.vscode("editor.action.showHover")
 join lines:                 user.vscode("editor.action.joinLines")
@@ -451,4 +451,5 @@ accept:                     user.vscode('github.copilot.acceptCursorPanelSolutio
 yes: user.vscode('editor.action.inlineSuggest.commit')
 
 #other
-dog comment:            user.vscode("editor.action.commentLine")
+toggle comment:            user.vscode("editor.action.commentLine")
+table:            user.vscode("editor.action.commentLine")

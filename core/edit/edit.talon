@@ -7,7 +7,7 @@ last one:                   edit.find_previous()
 tug:                        edit.left()
 
 tug <number_small> times:   user.left_n(number_small)
-t
+
 drain:                    edit.word_left()
 
 drain <number_small> times: user.words_left(number_small)

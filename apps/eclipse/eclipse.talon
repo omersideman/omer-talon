@@ -65,7 +65,7 @@ show shortcuts: key(ctrl-shift-l)
 # zen switch:
 
 # File Commands
-file hunt [<user.text>]:
+file <user.find> [<user.text>]:
     key(ctrl-shift-r)
     sleep(50ms)
     insert(text or "")

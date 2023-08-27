@@ -281,21 +281,16 @@ git rebase {user.git_branch}:
     "{git_branch}"
     key(enter)
     sleep(250ms)
-# git commit [<user.prose>]$: user.git_commit(prose or "")
-# git commit [<user.prose>] halt: user.git_commit(prose or "")
-# git commit <user.prose> disclose:
-#     user.git_commit(prose or "")
-#     edit.save()
-#     sleep(150ms)
-#     app.tab_close()
-#     sleep(250ms)
-git commit [<user.text>]:
-    user.vscode("git.commitStaged")
-    sleep(100ms)
-    user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
+git commit [<user.prose>]$: user.git_commit(prose or "")
+git commit [<user.prose>] halt: user.git_commit(prose or "")
+git commit <user.prose> disclose:
+    user.git_commit(prose or "")
+    edit.save()
+    sleep(150ms)
+    app.tab_close()
+    sleep(250ms)
 git commit undo: user.vscode("git.undoCommit")
 git commit amend: user.vscode("git.commitStagedAmend")
-Tried to add rephrase
 disk git commit [<user.prose>]$:
     key(esc:5)
     edit.save()
@@ -338,14 +333,15 @@ git revert:                 user.vscode("git.revertChange")
 git stash:                  user.vscode("git.stash")
 git stash pop:              user.vscode("git.stashPop")
 git status:                 user.vscode("workbench.scm.focus")
-git stage:                  user.vscode("git.stage")
-git stage oliver:           user.vscode("git.stageAll")
+git stage all:           user.vscode("git.stageAll")
 git stage all merge:        user.vscode("git.stageAllMerge")
 git unstage:                user.vscode("git.unstage")
 git unstage all:            user.vscode("git.unstageAll")
 git sync:                   user.vscode("git.sync")
-git a mend:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git amend")
+
+#these don't work, not sure why
+# git a mend:
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git amend")
 git reword:
     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git reword")
 git push force:
@@ -360,9 +356,6 @@ git full continue:
     user.vscode("git.stageAllMerge")
     user.git_commit(prose or "")
     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git imerge continue")
-
-# finish commit
-git done:                   key(cmd-w)
 
 # Use keyboard shortcuts because VSCode relies on when clause contexts to choose the appropriate
 # action: https://code.visualstudio.com/api/references/when-clause-contexts
@@ -380,7 +373,6 @@ test debug file:            user.vscode("testing.debugCurrentFile")
 test debug all:             user.vscode("testing.debugAll")
 test debug failed:          user.vscode("testing.debugFailTests")
 test debug last:            user.vscode("testing.debugLastRun")
-
 test cancel:                user.vscode("testing.cancelRun")
 
 # Debugging

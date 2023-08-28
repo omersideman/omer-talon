@@ -15,6 +15,8 @@ rerun [<user.text>]: user.terminal_rerun_search(text or "")
 rerun search: user.terminal_rerun_search("")
 kill all: user.terminal_kill_all()
 code here: user.terminal_open_code_here()
+new venv: user.terminal_new_venv()
+activate venv: user.terminal_activate_venv()
 
 copy paste:
     edit.copy()

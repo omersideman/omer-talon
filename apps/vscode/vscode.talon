@@ -179,7 +179,9 @@ dock clone:
     user.vscode("fileutils.duplicateFile")
     sleep(150ms)
 dock sibling [<user.filename>]:
-    user.vscode_with_plugin("andreas.newFile", filename or "") toggle#
+    user.vscode_with_plugin("andreas.newFile", filename or "") toggle
+
+# doc make environment: user.vscode_with_plugin("andreas.newFile", ".env")
 dock delete:                user.vscode("fileutils.removeFile")
 dock open folder:           user.vscode("revealFileInOS")
 dock reveal:                user.vscode("workbench.files.action.showActiveFileInExplorer")

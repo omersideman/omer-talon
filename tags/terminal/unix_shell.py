@@ -59,3 +59,13 @@ class Actions:
         """Opens VSCode in the current directory"""
         actions.insert("code .")
         actions.key("enter")
+
+    def terminal_new_venv():
+        """creates new virtual environment named venv"""
+        actions.insert("python3 -m venv venv")
+        actions.key("enter")
+
+    def terminal_activate_venv():
+        """Activates the virtual environment named venv"""
+        actions.insert("source venv/bin/activate")
+        actions.key("enter")

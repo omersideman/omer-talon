@@ -31,3 +31,9 @@ class Actions:
 
     def terminal_open_code_here():
         """Opens VSCode in the current directory"""
+
+    def terminal_new_venv():
+        """creates new virtual environment named venv"""
+
+    def terminal_activate_venv():
+        """Activates the virtual environment named venv"""

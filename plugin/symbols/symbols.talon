@@ -95,11 +95,3 @@ chronic:
     edit.line_end()
     insert(":")
     key(enter)
-
-activate venv:
-    insert("source venv/bin/activate")
-    key(enter)
-
-new venv:
-    insert("python3 -m venv venv")
-    key(enter)

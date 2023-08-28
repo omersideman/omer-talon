@@ -54,3 +54,8 @@ class Actions:
         actions.key("ctrl-c")
         actions.insert("y")
         actions.key("enter")
+
+    def terminal_open_code_here():
+        """Opens VSCode in the current directory"""
+        actions.insert("code .")
+        actions.key("enter")

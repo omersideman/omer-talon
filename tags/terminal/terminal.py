@@ -28,3 +28,6 @@ class Actions:
 
     def terminal_kill_all():
         """kills the running command"""
+
+    def terminal_open_code_here():
+        """Opens VSCode in the current directory"""

@@ -14,6 +14,7 @@ run last: user.terminal_run_last()
 rerun [<user.text>]: user.terminal_rerun_search(text or "")
 rerun search: user.terminal_rerun_search("")
 kill all: user.terminal_kill_all()
+code here: user.terminal_open_code_here()
 
 copy paste:
     edit.copy()

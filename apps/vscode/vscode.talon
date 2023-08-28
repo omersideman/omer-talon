@@ -194,6 +194,7 @@ disclose:
     sleep(150ms)
     key(cmd-w)
 disk gentle:                edit.save()
+disk all:                user.vscode("workbench.action.files.saveFiles")
 
 # Language Features
 suggest show:               user.vscode("editor.action.triggerSuggest")
@@ -450,5 +451,18 @@ accept:                     user.vscode('github.copilot.acceptCursorPanelSolutio
 yes: user.vscode('editor.action.inlineSuggest.commit')
 
 #other
-toggle comment:            user.vscode("editor.action.commentLine")
+# toggle comment:            user.vscode("editor.action.commentLine")
 table:            user.vscode("editor.action.commentLine")
+copy command id:         user.copy_command_id()
+
+# Snippets
+snip last:               user.vscode("jumpToPrevSnippetPlaceholder")
+[snip] next:             user.vscode("jumpToNextSnippetPlaceholder")
+
+# Imports
+imports organize:           user.vscode("editor.action.organizeImports")
+imports add:                user.vscode_add_missing_imports()
+imports fix:
+    user.vscode_add_missing_imports()
+    sleep(100ms)
+    user.vscode("editor.action.organizeImports")

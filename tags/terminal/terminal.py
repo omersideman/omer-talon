@@ -37,3 +37,6 @@ class Actions:
 
     def terminal_activate_venv():
         """Activates the virtual environment named venv"""
+
+    def terminal_pip_install_requirements():
+        """Installs requirements.txt"""

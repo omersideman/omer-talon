@@ -365,6 +365,13 @@ git full continue:
 change next:                key(alt-f5)
 change last:                key(shift-alt-f5)
 
+accept incoming: user.vscode("merge-conflict.accept.incoming")
+accept both: user.vscode("merge-conflict.accept.both")
+accept current: user.vscode("merge-conflict.accept.current")
+accept all current: user.vscode("merge-conflict.accept.all-current")
+accept all incoming: user.vscode("merge-conflict.accept.all-incoming")
+conflict next: user.vscode("merge-conflict.next")
+
 # Testing
 test run:                   user.vscode("testing.runAtCursor")
 test run file:              user.vscode("testing.runCurrentFile")
@@ -438,19 +445,18 @@ cell next:                  user.vscode("notebook.focusNextEditor")
 cell last:                  user.vscode("notebook.focusPreviousEditor")
 cell run above:             user.vscode("notebook.cell.executeCellsAbove")
 cell run:                   user.vscode("notebook.cell.execute")
-cell run all:               user.vscode("jupyter.restartkernelandrunallcells")
+run all:               user.vscode("jupyter.restartkernelandrunallcells")
+cell new: user.vscode("notebook.cell.insertCodeCellBelow")
+cell mark: user.vscode("notebook.cell.changeToMarkdown")
+cell code: user.vscode("notebook.cell.changeToCode")
+cell edit: user.vscode("notebook.cell.edit")
+cell last edit: user.vscode("notebook.focusPreviousEditor")
+cell exit: user.vscode("notebook.cell.quitEdit")
+
 
 install local:              user.vscode("workbench.extensions.action.installVSIX")
 preview markdown:           user.vscode("markdown.showPreview")
 
-# copilot
-bar chat:                   user.vscode('workbench.action.chat.openInSidebar')
-inline chat:                user.vscode('inlineChat.start')
-synthesize:                 user.vscode('github.copilot.generate')
-next solution:              user.vscode('github.copilot.nextPanelSolution')
-previous solution:          user.vscode('github.copilot.previousPanelSolution')
-accept:                     user.vscode('github.copilot.acceptCursorPanelSolution')
-yes: user.vscode('editor.action.inlineSuggest.commit')
 
 #other
 # toggle comment:            user.vscode("editor.action.commentLine")

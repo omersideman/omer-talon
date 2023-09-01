@@ -70,6 +70,10 @@ class Actions:
         actions.insert("source venv/bin/activate")
         actions.key("enter")
 
+    def terminal_pip_install():
+        """Installs a pip package"""
+        actions.insert("pip install ")
+
     def terminal_pip_install_requirements():
         """Installs requirements.txt"""
         actions.insert("pip install -r requirements.txt")

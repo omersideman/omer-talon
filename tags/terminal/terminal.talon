@@ -17,6 +17,7 @@ kill all: user.terminal_kill_all()
 code here: user.terminal_open_code_here()
 new venv: user.terminal_new_venv()
 activate venv: user.terminal_activate_venv()
+pip install: user.terminal_pip_install()
 pip install requirements: user.terminal_pip_install_requirements()
 
 copy paste:

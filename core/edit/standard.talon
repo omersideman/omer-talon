@@ -75,5 +75,5 @@ hey siri$:
 
 alphabet:                   "abcdefghijklmnopqrstuvwxyz"
 
-screen left: key(ctrl-left)
-screen right: key(ctrl-right)
+swipe: key(ctrl-left)
+swiper: key(ctrl-right)

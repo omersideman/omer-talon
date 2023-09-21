@@ -95,3 +95,10 @@ chronic:
     edit.line_end()
     insert(":")
     key(enter)
+
+slapper:
+    edit.line_end()
+    key(enter)
+    key(enter)
+
+

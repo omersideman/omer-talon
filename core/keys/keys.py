@@ -275,12 +275,13 @@ simple_keys = [
     # "insert",
     "pagedown",
     "pageup",
-    "space",
+    # "space",
     # "tab",
 ]
 
 alternate_keys = {
-    "pop": "enter",
+    "enter": "enter",
+    "void": "space",
     "drill": "delete",
     "scratch": "backspace",
     "scrape": "escape",

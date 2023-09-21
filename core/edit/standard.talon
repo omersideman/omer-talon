@@ -3,8 +3,8 @@ zoom out:                   edit.zoom_out()
 zoom reset:                 edit.zoom_reset()
 scroll up:                  edit.page_up()
 scroll down:                edit.page_down()
-copy that:                  edit.copy()
-cut that:                   edit.cut()
+copy:                       edit.copy()
+cut:                        edit.cut()
 (pace | paste) that:        edit.paste()
 show clip:
     key(cmd-shift-v)
@@ -18,7 +18,7 @@ show clip:
     key(cmd-shift-v)
     sleep(100ms)
     key("alt-{number_small}")
-(undo that | nope | blast): edit.undo()
+(undo that | nope | no | blast): edit.undo()
 (redo that | yes indeed):   edit.redo()
 paste match:                edit.paste_match_style()
 disk:                       edit.save()
@@ -75,5 +75,8 @@ hey siri$:
 
 alphabet:                   "abcdefghijklmnopqrstuvwxyz"
 
-swipe: key(ctrl-left)
-swiper: key(ctrl-right)
+swipe:                      key(ctrl-left)
+swiper:                     key(ctrl-right)
+mission:                    key(ctrl-up)
+language:                   key(ctrl-space)
+spotlight:                  key(cmd-space)

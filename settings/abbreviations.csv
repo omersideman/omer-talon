@@ -38,7 +38,6 @@ bool,boolean
 bot,bottom
 bp,break point
 bps,break points
-bc,british columbia
 buf,buffer
 btn,button
 btw,by the way
@@ -435,3 +434,6 @@ wnd,wind
 win,window
 ntoskrnl,windows kernel
 wip,work in progress
+lmk, let me know
+th, threshold
+difference,diff

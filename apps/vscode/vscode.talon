@@ -239,6 +239,7 @@ close tabs way left:        user.vscode("workbench.action.closeEditorsToTheLeft"
 <user.teleport> tab <number_small>:         user.vscode_tab(number_small)
 <user.teleport> tab {self.letter} [{self.letter}]:
     user.vscode_with_plugin("andreas.focusTab", "{letter_1}{letter_2 or ''}")
+close group:               user.vscode("workbench.action.closeEditorsInGroup")
 
 # Folding
 fold that:                  user.vscode("editor.fold")
@@ -294,6 +295,8 @@ git commit <user.prose> disclose:
     sleep(250ms)
 git commit undo: user.vscode("git.undoCommit")
 git commit amend: user.vscode("git.commitStagedAmend")
+git done: user.vscode("git.commitMessageAccept")
+
 disk git commit [<user.prose>]$:
     key(esc:5)
     edit.save()
@@ -445,13 +448,15 @@ cell next:                  user.vscode("notebook.focusNextEditor")
 cell last:                  user.vscode("notebook.focusPreviousEditor")
 cell run above:             user.vscode("notebook.cell.executeCellsAbove")
 cell run:                   user.vscode("notebook.cell.execute")
-run all:               user.vscode("jupyter.restartkernelandrunallcells")
+cell run all:               user.vscode("jupyter.restartkernelandrunallcells")
+cell restart:              user.vscode("jupyter.restartkernel")
 cell new: user.vscode("notebook.cell.insertCodeCellBelow")
 cell mark: user.vscode("notebook.cell.changeToMarkdown")
 cell code: user.vscode("notebook.cell.changeToCode")
 cell edit: user.vscode("notebook.cell.edit")
 cell last edit: user.vscode("notebook.focusPreviousEditor")
 cell exit: user.vscode("notebook.cell.quitEdit")
+cell <user.delete>: user.vscode("notebook.cell.delete")
 
 
 install local:              user.vscode("workbench.extensions.action.installVSIX")

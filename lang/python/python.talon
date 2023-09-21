@@ -28,13 +28,17 @@ settings():
 
 #python-specific grammars
 dunder in it: "__init__"
-state (def | deaf | deft): "def "
-state try: "try:\n"
-state except: "except "
-state raise: "raise "
+<user.operator> (def | deaf | deft): "def "
+<user.operator> try: "try:\n"
+<user.operator> except: "except "
+<user.operator> raise: "raise "
 self taught: "self."
 pie test: "pytest"
-state past: "pass"
+<user.operator> past: "pass"
+<user.operator> not: "not "
+<user.operator> global: "global "
+numb pie: "numpy"
+pie torch: "pytorch"
 
 [state] raise {user.python_exception}:
     user.insert_between("raise {python_exception}(", ")")

@@ -29,17 +29,17 @@ settings():
 (op | is) strict not equal: " !== "
 op null else: " ?? "
 
-state const: "const "
+<user.operator> const: "const "
 
-state let: "let "
+<user.operator> let: "let "
 
-state var: "var "
+<user.operator> var: "var "
 
-state export: "export "
+<user.operator> export: "export "
 
-state async: "async "
+<user.operator> async: "async "
 
-state await: "await "
+<user.operator> await: "await "
 
 dot {user.code_common_member_function}:
     user.insert_between(".{code_common_member_function}(", ")")

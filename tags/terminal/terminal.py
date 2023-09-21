@@ -39,7 +39,7 @@ class Actions:
         """Activates the virtual environment named venv"""
 
     def terminal_pip_install_requirements():
-        """Installs requirements.txt"""pokey-talon
+        """Installs requirements.txt"""
 
     def terminal_pip_install():
         """Installs a pip package"""

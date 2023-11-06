@@ -87,8 +87,11 @@ git switch [<user.text>]:
 git switch master: "git switch master "
 git switch main: "git switch main "
 git switch detached: "git switch --detach "
-git (switch create | new branch) [<user.text>]:
+git switch create [<user.text>]:
     "git switch -c {user.formatted_text(text or '', 'DASH_SEPARATED')}"
+git new branch [<user.text>]:
+    "git checkout -b omer/{user.formatted_text(text or '', 'DASH_SEPARATED')}"
+
 git switch orphan: "git switch --orphan "
 git submodule add: "git submodule add "
 git tag: "git tag "

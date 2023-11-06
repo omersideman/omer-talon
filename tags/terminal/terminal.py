@@ -43,3 +43,9 @@ class Actions:
 
     def terminal_pip_install():
         """Installs a pip package"""
+
+    def terminal_node_install():
+        """Installs a node package"""
+
+    def terminal_just():
+        """just file command"""

@@ -140,7 +140,7 @@ punctuation_words = {
     # TODO: I'm not sure why we need these, I think it has something to do with
     # Dragon. Possibly it has been fixed by later improvements to talon? -rntz
     "`": "`",
-    ",": ",",  # <== these things
+    "comma": ",",  # <== these things
     "back tick": "`",
     "period": ".",
     "full stop": ".",

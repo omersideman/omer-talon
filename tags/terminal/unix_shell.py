@@ -78,3 +78,11 @@ class Actions:
         """Installs requirements.txt"""
         actions.insert("pip install -r requirements.txt")
         actions.key("enter")
+
+    def terminal_node_install():
+        """Installs a node package"""
+        actions.insert("npm install ")
+
+    def terminal_just():
+        """just file command"""
+        actions.insert("just ")

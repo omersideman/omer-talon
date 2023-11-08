@@ -53,4 +53,4 @@ slacker [<phrase>]$:
     sleep(200ms)
     user.parse_phrase(phrase or "")
 termite:
-    user.switcher_focus("iTerm2")
+    user.switcher_focus("warp")
